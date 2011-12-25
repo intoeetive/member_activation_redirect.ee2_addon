@@ -25,7 +25,7 @@ if ( ! defined('EXT'))
 	exit('Invalid file request');
 }
 
-class Member_activation_redirect
+class Member_activation_redirect_ext
 {
 
 	var $name = 'Member Activation Redirect';
@@ -35,9 +35,10 @@ class Member_activation_redirect
 	var $docs_url = 'http://barrettnewton.com';
 	var $settings = array();	
 	
-	function __construct()
+	function __construct($settings='')
 	{
 		$this->EE =& get_instance();      
+		$this->settings = $settings;
 	}
 	
 	function activate_extension()
@@ -326,7 +327,7 @@ class Member_activation_redirect
 	
 	function do_redirect($member_id)
 	{
-		if (isset($this->settings['auto_login']) && $this->settings['auto_login']=='y')
+		if (isset($this->settings['auto_login']) && $this->settings['auto_login'][0]=='y')
 		{
 			$this->_login_by_id($member_id);
 		}
