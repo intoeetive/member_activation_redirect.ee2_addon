@@ -32,7 +32,7 @@ class Member_activation_redirect_ext
 	var $version = '1.0';
 	var $description = 'Redirect user after he clicks email confirmation link';
 	var $settings_exist = 'y';
-	var $docs_url = 'http://barrettnewton.com';
+	var $docs_url = 'https://github.com/intoeetive/member_activation_redirect.ee2_addon/blob/master/README';
 	var $settings = array();	
 	
 	function __construct($settings='')

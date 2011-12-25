@@ -1,0 +1,5 @@
+This extensions redirects ExpressionEngine user to specific page ("welcome page") after he clicks link in regitration confirmation email.
+
+Specify URL to redirect in settings. It can be absolute or relative URL. {member_id} will be replaced with actual member's ID.
+
+You can also optionally mark checkbox in settings to authomatically log in user after he confirms registration.
