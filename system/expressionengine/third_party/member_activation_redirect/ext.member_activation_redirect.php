@@ -20,7 +20,7 @@
 =====================================================
 */
 
-if ( ! defined('EXT'))
+if ( ! defined('BASEPATH'))
 {
 	exit('Invalid file request');
 }
@@ -29,7 +29,7 @@ class Member_activation_redirect_ext
 {
 
 	var $name = 'Member Activation Redirect';
-	var $version = '1.0';
+	var $version = '1.1';
 	var $description = 'Redirect user after he clicks email confirmation link';
 	var $settings_exist = 'y';
 	var $docs_url = 'https://github.com/intoeetive/member_activation_redirect.ee2_addon/blob/master/README';
@@ -250,10 +250,11 @@ class Member_activation_redirect_ext
 			$this->EE->session->gc_probability = 100;
 			$this->EE->session->delete_old_sessions();
             
-            $this->EE->db->select('ip_address, user_agent')
+            $ts = time() - $this->EE->session->session_length;
+			$this->EE->db->select('ip_address, user_agent')
                         ->from('exp_sessions')
                         ->where('member_id', $member_id)
-                        ->where('last_activity > '.time() - $this->EE->session->session_length)
+                        ->where('last_activity > '.$ts)
                         ->where('site_id', $site_id);
             $sess_check = $this->EE->db->get();
 
