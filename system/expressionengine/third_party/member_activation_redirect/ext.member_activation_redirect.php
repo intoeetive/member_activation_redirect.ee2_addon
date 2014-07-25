@@ -29,7 +29,7 @@ class Member_activation_redirect_ext
 {
 
 	var $name = 'Member Activation Redirect';
-	var $version = '1.1';
+	var $version = '1.2';
 	var $description = 'Redirect user after he clicks email confirmation link';
 	var $settings_exist = 'y';
 	var $docs_url = 'https://github.com/intoeetive/member_activation_redirect.ee2_addon/blob/master/README';
@@ -217,7 +217,7 @@ class Member_activation_redirect_ext
         				'orig_site_id' => $this->EE->input->get('orig_site_id')
         			);
         			
-        			$next_url = $sites[$next].'?'.http_build_query($next_qs);
+        			$next_url = $sites_list[$next].'?'.http_build_query($next_qs);
         
         			return $this->EE->functions->redirect($next_url);
     			}
@@ -302,7 +302,7 @@ class Member_activation_redirect_ext
             $sites_list = array_filter($sites_list, 'strlen');
 			$current_site	= $this->EE->functions->fetch_site_index();
 
-			if (count($sites) > 1 && in_array($current, $sites))
+			if (count($sites_list) > 1 && in_array($current, $sites_list))
 			{
 				$orig = array_search($current_site, $sites_list);
 				$next = ($orig == '0') ? '1' : '0';
@@ -315,7 +315,7 @@ class Member_activation_redirect_ext
     				'orig_site_id' => $orig
     			);
     			
-    			$next_url = $sites[$next].'?'.http_build_query($next_qs);
+    			$next_url = $sites_list[$next].'?'.http_build_query($next_qs);
     
     			return $this->EE->functions->redirect($next_url);
 			}
