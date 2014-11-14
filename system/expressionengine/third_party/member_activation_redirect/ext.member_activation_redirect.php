@@ -308,8 +308,9 @@ class Member_activation_redirect_ext
 				$orig = array_search($current_site, $sites_list);
 				$next = ($orig == '0') ? '1' : '0';
 
-    			$next_qs = array(
-    				'ACT'	=> $this->EE->functions->fetch_action_id('Member', 'member_login'),
+    			$act_q = $this->EE->db->select('action_id')->from('actions')->where('class', 'Member')->where('method', 'member_login')->get();
+                $next_qs = array(
+    				'ACT'	=> $act_q->row('action_id'),
     				'cur'	=> $next,
     				'orig'	=> $orig,
     				'multi'	=> $this->EE->session->userdata['session_id'],
